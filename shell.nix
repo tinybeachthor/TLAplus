@@ -20,4 +20,7 @@ mkShell {
     tlaplusToolbox
     tetex
   ];
+  shellHook = ''
+    TERM=xterm
+  '';
 }

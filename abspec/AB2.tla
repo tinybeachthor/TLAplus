@@ -12,7 +12,7 @@ TypeOK == /\ AVar \in Data \X {0, 1}
           /\ BVar \in Data \X {0, 1}
           /\ AtoB2 \in Seq((Data \X {0, 1}) \union {Bad})
           /\ BtoA2 \in Seq({0, 1, Bad})
-          
+
 Init == /\ AVar \in Data \X {1}
         /\ BVar = AVar
         /\ AtoB2 = <<>>
@@ -30,22 +30,22 @@ ARcv == /\ BtoA2 /= <<>>
               ELSE UNCHANGED AVar
         /\ BtoA2' = Tail(BtoA2)
         /\ UNCHANGED <<BVar, AtoB2>>
-        
+
 BRcv == /\ AtoB2 /= <<>>
         /\ IF (Head(AtoB2) /= Bad) /\ (Head(AtoB2)[2] /= BVar[2])
               THEN BVar' = Head(AtoB2)
               ELSE UNCHANGED BVar
         /\ AtoB2' = Tail(AtoB2)
         /\ UNCHANGED <<AVar, BtoA2>>
-        
-CorruptMsg == /\ \/ /\ \E i \in 1..Len(AtoB2): 
+
+CorruptMsg == /\ \/ /\ \E i \in 1..Len(AtoB2):
                             AtoB2' = [AtoB2 EXCEPT![i] = Bad]
                     /\ UNCHANGED BtoA2
                  \/ /\ \E i \in 1..Len(BtoA2):
                             BtoA2' = [BtoA2 EXCEPT![i] = Bad]
                     /\ UNCHANGED AtoB2
               /\ UNCHANGED <<AVar, BVar>>
-        
+
 Next == ASnd \/ ARcv \/ BSnd \/ BRcv \/ CorruptMsg
 
 Spec == Init /\ [][Next]_vars

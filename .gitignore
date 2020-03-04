@@ -1,2 +1,5 @@
-*.pdf
-
+**/*SnapShot*
+**/*.log
+**/*.tex
+**/*.aux
+*.toolbox/**/*.pdf

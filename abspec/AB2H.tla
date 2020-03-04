@@ -26,13 +26,13 @@ RemoveBad(seq) ==
 SpecH == /\ AB2!Spec
          /\ [] /\ AtoB = RemoveBad(AtoB2)
                /\ BtoA = RemoveBad(BtoA2)
-               
+
 ----
-    
+
 AB == INSTANCE AB
 THEOREM SpecH => AB!Spec
 
-         
+
 =============================================================================
 \* Modification History
 \* Last modified Sun Nov 17 22:12:06 CET 2019 by martin
